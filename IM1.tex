@@ -1,0 +1,55 @@
+\section{IM1}
+
+
+My proposed first IM would be to integrate comCam in La Serena.  This means:
+\begin{itemize}
+   \item running comCam reliably in Chile
+   \begin{itemize}
+       \item without logging into CCS machines
+       \item integrating camera-side monitoring into Rubin operations
+       \item writing files the way that we plan to in operations (i.e. directly from CCS)
+   \end{itemize}
+   \item taking data using the OCS
+       \begin{itemize}
+          \item writing telemetry to the EFD
+          \item using a logging system (which Frossie is designing for SITCOM); no use of \eg eTraveller
+          \item using the script queue
+          \begin{itemize}
+             \item In particular calibration sets: bias, dark, flat, PTC
+          \end{itemize}
+          \item using LOVE to see monitor operations
+       \item using OCPS (OCS driven Data Processing; DMTN-133) to process data in Chile
+       \begin{itemize}
+          \item need to understand interaction with the diagnostic cluster
+       \end{itemize}
+       \item with a nublado instance in Chile to allow ad-hoc analysis
+       \end{itemize}
+   \item transferring data to NCSA and ingesting with a few-second latency and 100\% reliability,
+         or at least logging
+   \begin{itemize}
+      \item mirroring or copying the EFD
+   \end{itemize}
+   \item automatically processing suitable data as it arrives
+   \begin{itemize}
+      \item presumably using gen3
+      \item N.b. will require us to establish conventions on ``suitable data''
+   \end{itemize}
+   \item running automated calibration scripts
+   \begin{itemize}
+      \item including QA
+   \end{itemize}
+   \item doing something with the results of the QA
+   \item using the RSP to look at data
+   \begin{itemize}
+      \item including EFD access
+      \item and a decently-high up time and performance.
+   \end{itemize}
+   \item things I haven't thought of yet
+\end{itemize}
+
+
+Quite a lot of this doesn't exist, and may have to be moved out to a later IM depending on resource
+availability.  I suspect there'll be push-back on some of this because doing things this way isn't the way
+that it was planned (or really not planned, but written down in silos).  In some cases this will be
+reasonable, for example we may decide that some fraction of CCS configuration is indeed better carried out by
+logging into CCS nodes.

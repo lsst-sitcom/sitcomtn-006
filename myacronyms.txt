@@ -5,3 +5,6 @@
 #
 # Example:
 #   MIA:Missing In Action
+IM:Integration Milestone
+OR:Operation Rehearsal
+RAT:Rubin Auxiliary Telescope

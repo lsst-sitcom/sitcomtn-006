@@ -3,12 +3,20 @@
 \input{meta}
 
 % Package imports go here.
+\usepackage{xspace}
 
 % Local commands go here.
+\renewcommand{\c}{\textit{c.}\xspace}
+\newcommand{\cf}{\textit{cf.}\xspace}
 
 %If you want glossaries
-%\input{aglossary.tex}
-%\makeglossaries
+\makeglossaries
+\input{aglossary.tex} 
+
+% don't expand these abbreviations
+\glsunset{CCS}
+\glsunset{DM}
+\glsunset{OCS}
 
 \title{Integration Milestones}
 
@@ -39,16 +47,34 @@ A proposal for ways to work on predominantly software subsystem commissioning,  
   \addtohist{1}{YYYY-MM-DD}{Unreleased.}{Robert Lupton}
 }
 
-
 \begin{document}
 
-% Create the title page.
 \maketitle
-% Frequently for a technote we do not want a title page  uncomment this to remove the title page and changelog.
-% use \mkshorttitle to remove the extra pages
 
-% ADD CONTENT HERE
-% You can also use the \input command to include several content files.
+\section{Introduction}
+
+The Rubin construction project is composed of three main subsystems: DM, Camera, and T\&S.\footnote{
+  And also EPO, but this is not relevant here.}
+but in operations there is only one survey.  The task of merging the projects is not easy, especially
+when some of the interfaces are underspecified, or turn out to need modification based on experience.
+This is primarily
+a problem for the software --- the hardware interfaces, specified in mm and screw threads, are generally
+well defined.
+
+Once we accept that the only way to complete the integration of the subsystems is to actually integrate them,
+while expecting that the interfaces and requirements will evolve, we recognise that our
+situation is analogous to the
+way that software development has moved from waterfall to agile development models.
+
+This technote proposes that we introduce the concept of an \gls{IM} which defines
+a specified set of functionalities that are available to the Rubin project.
+This is slightly different from \gls{DM}'s
+current \gls{OR} concept which tests the state of DM systems at a certain time rather than guaranteeing
+continued cross-subsystem functionality.  I envisage that an \gls{IM} would be followed by an \gls{OR} to test
+the deliverable, and to carry out an internal \gls{ORR} for the functionality delivered by the \gls{IM}.
+
+\input{IM0}
+\input{IM1}
 
 \appendix
 % Include all the relevant bib files.
@@ -61,10 +87,6 @@ A proposal for ways to work on predominantly software subsystem commissioning,  
 \section{Acronyms} \label{sec:acronyms}
 \input{acronyms.tex}
 % If you want glossary uncomment below -- comment out the two lines above
-%\printglossaries
-
-
-
-
+\printglossaries
 
 \end{document}
