@@ -1,50 +1,75 @@
 \section{IM1}
 
-
-My proposed first IM would be to integrate comCam in La Serena.  This means:
+I propose using integrating comCam in La Serena into the complete Rubin system. The work in IM1 is
+intended to be 6-8 months.
+This means
 \begin{itemize}
-   \item running comCam reliably in Chile
-   \begin{itemize}
-       \item without logging into CCS machines
-       \item integrating camera-side monitoring into Rubin operations
-       \item writing files the way that we plan to in operations (i.e. directly from CCS)
-   \end{itemize}
-   \item taking data using the OCS
-       \begin{itemize}
-          \item writing telemetry to the EFD
-          \item using a logging system (which Frossie is designing for SITCOM); no use of \eg eTraveller
-          \item using the script queue
-          \begin{itemize}
-             \item In particular calibration sets: bias, dark, flat, PTC
-          \end{itemize}
-          \item using LOVE to see monitor operations
-       \item using OCPS (OCS driven Data Processing; DMTN-133) to process data in Chile
-       \begin{itemize}
-          \item need to understand interaction with the diagnostic cluster
-       \end{itemize}
-       \item with a nublado instance in Chile to allow ad-hoc analysis
-       \end{itemize}
-   \item transferring data to NCSA and ingesting with a few-second latency and 100\% reliability,
-         or at least logging
-   \begin{itemize}
-      \item mirroring or copying the EFD
-   \end{itemize}
-   \item automatically processing suitable data as it arrives
-   \begin{itemize}
-      \item presumably using gen3
-      \item N.b. will require us to establish conventions on ``suitable data''
-   \end{itemize}
-   \item running automated calibration scripts
-   \begin{itemize}
-      \item including QA
-   \end{itemize}
-   \item doing something with the results of the QA
-   \item using the RSP to look at data
-   \begin{itemize}
-      \item including EFD access
-      \item and a decently-high up time and performance.
-   \end{itemize}
-   \item things I haven't thought of yet
+\item Using observatory codes to command comCam, with visibility from non-camera systems
+  into all relevant camera parameters;
+\item Copying ``house keeping'' (\eg influxDB) to NCSA;
+\item Transferring comCam data to NCSA and ingesting into Gen3;
+\item Automatic generation and validation of calibration products
+\end{itemize}
+
+In more detail:
+\begin{itemize}
+\item Run comCam reliably in Chile
+  \begin{itemize}
+  \item without logging into CCS machines
+  \item integrating camera-side monitoring into Rubin operations
+    \begin{itemize}
+    \item Query: Will the camera database utilities play well with influxdb?
+    \end{itemize}
+  \item writing files the way that we plan to in operations (i.e. directly from CCS)
+    \begin{itemize}
+    \item \Nb I believe that this is not currently planned for comCam
+    \end{itemize}
+  \end{itemize}
+\item Take data using the OCS
+  \begin{itemize}
+  \item writing telemetry to the EFD
+  \item using a logging system (which Frossie is designing for SITCOM); no use of \eg eTraveller
+  \item using the script queue
+    \begin{itemize}
+    \item In particular calibration sets: bias, dark, flat, PTC
+    \end{itemize}
+  \item using LOVE to see monitor operations
+  \item using OCPS (OCS driven Data Processing; DMTN-133) to process data in Chile
+    \begin{itemize}
+    \item we may want to define an intermediate milestone, and defer processing data to IM2
+    \item need to understand interaction with the diagnostic cluster
+    \end{itemize}
+  \item Ingesting promptly into Gen3 in La Serena
+  \item Using a nublado instance in La Serena to allow ad-hoc analysis
+  \end{itemize}
+\item Transfer data to NCSA and ingesting with a few-second latency and 100\% reliability,
+  or at least logging failures
+  \begin{itemize}
+  \item This may be need to be delayed until IM2, but a latency much less than a day is
+    necessary
+  \end{itemize}
+  \begin{itemize}
+  \item Mirror or copy the EFD to NCSA
+    \begin{itemize}
+    \item At a latency TBD
+    \end{itemize}
+  \end{itemize}
+\item Automatically process suitable data as it arrives
+  \begin{itemize}
+  \item presumably using gen3
+  \item N.b. will require us to establish conventions on ``suitable data''
+  \end{itemize}
+\item Run automated calibration scripts
+  \begin{itemize}
+  \item For IM1 it may be simpler to run these in Chile, but ideally NCSA should also be possible
+  \item including QA
+  \end{itemize}
+\item Do something with the results of the QA
+\item Use the RSP to look at data
+  \begin{itemize}
+  \item including EFD access
+  \item and a decently-high up time and performance.
+  \end{itemize}
 \end{itemize}
 
 
@@ -53,3 +78,5 @@ availability.  I suspect there'll be push-back on some of this because doing thi
 that it was planned (or really not planned, but written down in silos).  In some cases this will be
 reasonable, for example we may decide that some fraction of CCS configuration is indeed better carried out by
 logging into CCS nodes.
+
+\subsection{Lessons Learned}
