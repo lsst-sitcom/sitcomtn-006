@@ -1,0 +1,59 @@
+\section{Milestone Activity IM\(_{\text{j}}\): Start/End of Night (with AuxTel)    (2021-XX-YY)}
+\label{sec:orgb5f35b4}
+Executive Summary:
+
+Exercise handoffs between day crew and night crew. Perform afternoon calibrations.
+Perform observatory opening/closing. 
+Requires definition of opening/closing procedures and appropriate observing conditions.
+Also requires mechanism to get knowledge from night crew into Jira tickets which are then subsequently.
+How do we use LOVE/EUI/notebooks to troubleshoot/resolve faults?
+
+\subsection{Goals of IM}
+\begin{itemize}
+\item Have observing specialist run the AuxTel, including
+  \begin{itemize}
+  \item Perform nighttime hand off sequence
+  \end{itemize}
+\item Run afternoon calibrations, reduce them using \gls{OCPS}, run QA, and possibly certify for use
+\item Test Camera Image Visualization Tool
+  \begin{itemize}
+  \item This is a camera deliverable and I'm completely unaware of it's status.
+  \end{itemize}
+\item Verify current environmental conditions against acceptable conditions (Where are these hosted?)
+  \begin{itemize}
+  \item Winds, seeing, humidity, windshake conditions (shutter/vent gate configurations), temperature
+  \end{itemize}
+\item Run opening script
+  \begin{itemize}
+  \item Functionality requires review to ensure component safety etc.
+  \item When do we start observing?
+  \end{itemize}
+\item Perform several standard (spectroscopic) AuxTel visits
+  \begin{itemize}
+  \item Simulate a fault, have pre-derived written instructions to "reset" 
+    \begin{itemize}
+    \item Instructions must not include syntax!
+      \begin{itemize}
+      \item e.g. unwrap rotator, manually close vent gates 1-3, put down and push up mirror, home hexapod and re-position etc,
+      \end{itemize}
+    \end{itemize}
+  \item Use logger to record important information
+  \item Create Jira ticket(s)
+  \item Run pre-derived commands
+  \end{itemize}
+\item Recover, Perform more visits
+  \begin{itemize}
+  \item Simulate weather event requiring closure of observatories
+  \end{itemize}
+\item Recover, perform more visits
+\item Sun rising, Close observatory, publish night report
+\item Perform daytime handoff, including the procedure to getting the JIRA tickets filtered and addressed accordingly
+\end{itemize}
+
+\subsection{Prerequisites}
+\begin{itemize}
+\item AuxTel system fully functional
+\item LOVE screens should be operational for mount/dome/mirrors(?)
+\item RLS system with fault reporting
+\item EAS
+\end{itemize}

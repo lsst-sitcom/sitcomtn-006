@@ -10,3 +10,12 @@ http
 p
 s
 A
+RHL
+KTL
+STANDBY
+JIRA
+XX
+YY
+II
+USA
+SITCOMTN

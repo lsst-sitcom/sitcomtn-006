@@ -54,7 +54,7 @@ A proposal for ways to work on predominantly software subsystem commissioning,  
 \section{Introduction}
 
 The Rubin construction project is composed of three main subsystems: DM, Camera, and T\&S.\footnote{
-  And also EPO, but this is not relevant here.}
+  And also EPO, but this is probably not relevant here.}
 but in operations there is only one survey.  The task of merging the projects is not easy, especially
 when some of the interfaces are underspecified, or turn out to need modification based on experience.
 This is primarily
@@ -73,9 +73,25 @@ current \gls{OR} concept which tests the state of DM systems at a certain time r
 continued cross-subsystem functionality.  I envisage that an \gls{IM} would be followed by an \gls{OR} to test
 the deliverable, and to carry out an internal \gls{ORR} for the functionality delivered by the \gls{IM}.
 
+\iffalse
 \input{IM0}
 \input{IM1}
 \input{IM2}
+\else
+\newcommand{\inputIM}[1]{\vfil\eject\input{#1}}
+\inputIM{IMa}
+\inputIM{IMb}
+\inputIM{IMc}
+\inputIM{IMd}
+\inputIM{IMe}
+\inputIM{IMf}
+\inputIM{IMg}
+\inputIM{IMh}
+\inputIM{IMi}
+\inputIM{IMj}
+\inputIM{IMk}
+\inputIM{IMbacklog}
+\fi
 
 \appendix
 % Include all the relevant bib files.

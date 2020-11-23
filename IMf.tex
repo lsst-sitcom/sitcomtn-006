@@ -1,0 +1,26 @@
+\section{Milestone Activity IM\(_{\text{f}}\): Corner raft AOS                     (2021-XX-YY)}
+\label{sec:org56c5b30}
+Executive Summary:
+
+Use a notebook to process corner raft SW0/1 simulated data, publishing wavefront error events
+
+\subsection{Goals of IM}
+
+Demonstrate ability to:
+\begin{itemize}
+\item Slew to a field (only needed to provide ra, dec, rotator telemetry)
+  \begin{itemize}
+  \item Question: does AOS need anything from the scheduler about the next field?
+  \end{itemize}
+\item Command exposure (or pair, if that's required by AOS) from ComCam
+\item have MTAOS process images, triggered by appropriate events, and publish \{\{camera,m2\}Hexapod,\{m1m3,m2\}\}Correction events
+\end{itemize}
+
+\subsection{Prerequisites}
+\begin{itemize}
+\item Recover PhoSim images with donuts from ComCam
+  \begin{itemize}
+  \item we may need to fake something here, if ComCam cannot play back corner raft data
+  \end{itemize}
+\item Pointing component generating telemetry
+\end{itemize}

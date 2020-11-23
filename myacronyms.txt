@@ -5,6 +5,20 @@
 #
 # Example:
 #   MIA:Missing In Action
+CAP:Commissioning Activity Project
+EAS:Environmental Awareness System
+EUI:Engineering User Interface
 IM:Integration Milestone
+LFA:Large File Annex
+LHN:Long Haul Network
+MTAOS:Main Telescope Active Optics System
+MTMCS:Main Telescope Mount Control System
+OCPS:OCS Controlled Processing System
 OR:Operation Rehearsal
-RAT:Rubin Auxiliary Telescope
+OWL:Observatory Wide Logging
+pDBB:prototype Data BackBone
+PPI:Prompt Processing Ingestion
+PTC:Photon Transfer Curve
+RLS:Rubin Observatory Logging (may be equivalent to OWL)
+SW0:Science Wavefront 0 (also 1)
+WFE:Wave Front Error

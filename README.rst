@@ -10,7 +10,8 @@ Integration Milestones
 SITCOMTN-006
 ============
 
-A proposal for ways to work on predominantly software subsystem commissioning,  building on the RAT (n\'ee auxTel) experience
+A proposal for ways to work on predominantly software subsystem commissioning,
+building on the Rubin auxiliary Telescope experience
 
 Links
 =====

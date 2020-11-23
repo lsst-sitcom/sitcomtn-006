@@ -1,0 +1,45 @@
+\section{Milestone Activity IM\(_{\text{i}}\): Commission Active Optics System     (2021-XX-YY)}
+\label{sec:orgacbb624}
+Executive Summary:
+
+Simulate AOS commissioning, including building LUTs
+
+Outstanding questions:
+\begin{itemize}
+\item Are we verifying anything here?
+\item Should this be split into two IMs?
+\end{itemize}
+
+\subsection{Goals of IM}
+Demonstrate running full AOS functionality script at 3 elevations
+\begin{itemize}
+\item scriptQueue runs SAL script
+  \begin{itemize}
+  \item pistons camera (in, -out, in, +out, in)
+  \item uses \gls{OCPS} to reduce data on commissioning cluster
+    \begin{itemize}
+    \item Returns Zernikes
+    \end{itemize}
+  \item Script awaits on \gls{OCPS} reduction finishing
+  \item AOS uses returned Zernikes to calculate mirror offsets as part of loop
+  \item Applies offsets and repeat
+  \item in-focus images get sent off via \gls{OCPS} for reduction
+  \end{itemize}
+\end{itemize}
+\begin{itemize}
+\item Build LUT for each mirror and hexapod
+\item Load the LUTs into components
+  \begin{itemize}
+  \item Ideally would use new configuration handling tstn-017
+  \end{itemize}
+\item Repeat elevation testing with new LUTs
+  \begin{itemize}
+  \item results should show zero WFE
+  \end{itemize}
+\item Analysis should be repeated at NCSA
+\end{itemize}
+
+\subsection{Prerequisites}
+\begin{itemize}
+\item IM\(_{\text{f}}\)
+\end{itemize}
