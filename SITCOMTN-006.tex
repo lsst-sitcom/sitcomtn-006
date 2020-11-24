@@ -9,14 +9,27 @@
 \renewcommand{\c}{\textit{c.}\xspace}
 \newcommand{\cf}{\textit{cf.}\xspace}
 
+\newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}}
+\newcommand{\declareIM}[4]{%
+  % \declareIM{label}{short name}{date}{title}
+  % e.g.
+  %    \declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}
+  % where you refer to the IM as \IM{b} and it appears as IM_B
+  %
+  \section{IM\texorpdfstring{$_{\text{#2}}$}{#2}: #4 (#3)}%
+  \label{IM:#1}%
+  \expandafter\newcommand\csname nameIM#1\endcsname{#2}%
+}
+
+
 %If you want glossaries
 \makeglossaries
 \input{aglossary.tex} 
-
-% don't expand these abbreviations
-\glsunset{CCS}
-\glsunset{DM}
-\glsunset{OCS}
+\glsunsetall  % never expand acronyms
+\iftrue\else % colour rather than box acronyms
+   \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}
+   \renewcommand*{\glstextformat}[1]{\textcolor{red}{#1}}
+\fi
 
 \title{Integration Milestones}
 
