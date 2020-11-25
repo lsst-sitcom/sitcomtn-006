@@ -2,7 +2,7 @@ DOCTYPE = SITCOMTN
 DOCNUMBER = 006
 DOCNAME = $(DOCTYPE)-$(DOCNUMBER)
 
-tex = $(filter-out $(wildcard *acronyms.tex) , $(wildcard *.tex))
+tex = $(filter-out $(wildcard *aglossary.tex) , $(wildcard *.tex))
 
 GITVERSION := $(shell git log -1 --date=short --pretty=%h)
 GITDATE := $(shell git log -1 --date=short --pretty=%ad)
@@ -14,10 +14,10 @@ endif
 export TEXMFHOME ?= lsst-texmf/texmf
 
 # Add aglossary.tex as a dependancy here if you want a glossary (and remove acronyms.tex)
-$(DOCNAME).pdf: $(tex) meta.tex local.bib acronyms.tex
+$(DOCNAME).pdf: $(tex) meta.tex local.bib aglossary.tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
-#	makeglossaries $(DOCNAME)
-#	xelatex $(SRC)
+	makeglossaries $(DOCNAME)
+	xelatex $(SRC)
 # For glossary uncomment the 2 lines above
 
 
