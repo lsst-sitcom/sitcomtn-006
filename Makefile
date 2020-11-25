@@ -43,7 +43,7 @@ meta.tex: Makefile .FORCE
 	rm -f $@
 	touch $@
 	echo '% GENERATED FILE -- edit this in the Makefile' >>$@
-	echo -n '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
-	echo -n '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
-	echo -n '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
-	echo -n '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
+	echo  '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
+	echo  '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
+	echo  '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
+	echo  '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
