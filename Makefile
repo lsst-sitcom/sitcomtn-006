@@ -17,7 +17,7 @@ export TEXMFHOME ?= lsst-texmf/texmf
 $(DOCNAME).pdf: $(tex) meta.tex local.bib aglossary.tex
 	latexmk -bibtex -xelatex -f $(DOCNAME)
 	makeglossaries $(DOCNAME)
-	xelatex $(SRC)
+	xelatex $(DOCNAME).tex
 # For glossary uncomment the 2 lines above
 
 
@@ -43,7 +43,7 @@ meta.tex: Makefile .FORCE
 	rm -f $@
 	touch $@
 	echo '% GENERATED FILE -- edit this in the Makefile' >>$@
-	/bin/echo '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
-	/bin/echo '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
-	/bin/echo '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
-	/bin/echo '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
+	echo -n '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
+	echo -n '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
+	echo -n '\newcommand{\vcsRevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
+	echo -n '\newcommand{\vcsDate}{$(GITDATE)}' >>$@
