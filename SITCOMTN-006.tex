@@ -10,6 +10,7 @@
 \newcommand{\cf}{\textit{cf.}\xspace}
 
 \newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}}
+\makeatletter
 \newcommand{\declareIM}[4]{%
   % \declareIM{label}{short name}{date}{title}
   % e.g.
@@ -18,8 +19,9 @@
   %
   \section{IM\texorpdfstring{$_{\text{#2}}$}{#2}: #4 (#3)}%
   \label{IM:#1}%
-  \expandafter\newcommand\csname nameIM#1\endcsname{#2}%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
 }
+\makeatother
 
 
 %If you want glossaries
