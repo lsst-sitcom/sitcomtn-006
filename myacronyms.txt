@@ -20,5 +20,6 @@ pDBB:prototype Data BackBone
 PPI:Prompt Processing Ingestion
 PTC:Photon Transfer Curve
 RLS:Rubin Observatory Logging (may be equivalent to OWL)
+SITCom:System Integration, Test and Commissioning
 SW0:Science Wavefront 0 (also 1)
 WFE:Wave Front Error

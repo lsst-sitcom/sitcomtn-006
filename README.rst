@@ -35,6 +35,23 @@ Clean built files::
 
     make clean
 
+Adding a new Integration Milestone
+----------------------------------
+
+IMs live in their own file, e.g. IMa.tex which you'll need to `\\inputIM{IMa}` in SITCOMTN-006.tex.
+At the top of the file there's a line::
+
+   \declareIM{LABEL}{NAME}{DATE}{TITLE}
+
+e.g.::
+
+   \declareIM{a}{1}{2020-12-25}{ComCam Image Capture and Archive}
+
+where `LABEL` is how you refer to the IM (as `\\IM{LABEL}`), `NAME` is its identifier,
+`DATE` is when the IM should be complete, and `TITLE` is a description.  The separation
+of `LABEL` from `NAME` allows us to reorder IMs without disturbing cross-references or
+informal discussion.
+
 Updating acronyms
 -----------------
 
