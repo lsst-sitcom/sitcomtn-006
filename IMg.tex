@@ -25,3 +25,13 @@ Demonstrate:
 \item notebook/script to perform pistoning of camera hexapod with image acquisition
 \item \gls{OCPS}
 \end{itemize}
+
+\subsection{Procedure}
+\begin{itemize}
+\item Generate simulated images with desired pistons (e.g. $[0, -10, 0, 10, 0]$) and appropriate
+  metadata and load into comCam
+\item Use \gls{scriptQueue} to issue slew and camera commands, sending commands to \gls{OCPS}
+      to process the data.  \Nb will require the \gls{AOS} to synchronise the piston values
+      with the OCPS exposure numbers (\texttt{seqNum}).
+\item Check that desired events are in the EFD
+\end{itemize}

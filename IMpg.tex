@@ -1,4 +1,4 @@
-\declareIM{pg}{pG}{2021-XX-YY}{Standalone ComCam AOS}
+\declareIM{pg}{pre-G}{2021-XX-YY}{Standalone ComCam AOS}
 Executive Summary:
 ​
 Process phosim Intra/Extra simulated ComCam images with the MTAOS.
@@ -22,9 +22,11 @@ Demonstrate ability to:
 
 \subsection{Procedure}
 \begin{itemize}
-\item Generate and ingest simulated images with desired pistons (e.g. $[-10, 0, 0, 10]$) and appropriate
+\item Generate and ingest simulated images with desired pistons (e.g. $[0, -10, 0, 10, 0]$) and appropriate
   metadata
 \item Manually issue commands to AOS system to process the data; in \IM{g} we will generate these
   commands from the \gls{scriptQueue}, triggered by \gls{OODS} events.
+    \Nb we may need an extra config file for this IM providing information which will
+    come from SAL in \IM{g}
 \item Check that desired events are in the EFD
 \end{itemize}
