@@ -1,4 +1,4 @@
-\declareIM{a}{A}{2020-XX-YY}{ComCam Image Capture and Archive}
+\declareIM{a}{1}{2021-01-08}{ComCam Image Capture and Archive}
 
 Executive Summary:
 
@@ -8,9 +8,9 @@ Run ComCam from notebooks, with generation and certification of ComCam calibrati
 \label{sec:orgbea7b56}
 \begin{itemize}
 \item Taking ComCam images in Chile using nublado
-\item Taking calibration and other images using the scriptQueue
+\item Taking calibration and other images using the \gls{scriptQueue}
 \item Automatic ingestion into a gen3 butler in Chile
-\item Transfer over \gls{pDBB} and the \gls{LHN} to NCSA, followed by gen3 ingest
+\item Transfer over \gls{DBB Buffer manager} and the \gls{LHN} to a gen3 repo at NCSA
 \item Human generation and availability of master calibrations in Chile
 % \item EFD client access at NCSA
 \end{itemize}
@@ -20,9 +20,24 @@ Run ComCam from notebooks, with generation and certification of ComCam calibrati
 \item{ComCam on summit}
 \begin{itemize}
 \item cold and functional
-\item integrating sphere and filters (expected to be available by 2020-12-01)
 \end{itemize}
 \item{gen3 butler ingestion for comCam}
 \item{Nublado running in Chile}
 \end{itemize}
 
+\subsection{Procedure}
+\begin{itemize}
+\item Use nublado to take bias, dark, flat, and PTC calibration data
+\item Convert nublado cells to \gls{scriptQueue} and run them
+\item In Chile,
+  \begin{itemize}
+  \item Run gen3 \gls{cp_pipe} by hand from a nublado terminal
+    \begin{itemize}
+    \item Use ``auto-certify'' mode which assumes that the derived products are good
+    \item \Nb this results in the calibs being available for further use
+    \end{itemize}
+  \item Take further exposures, if possible with structured illumination
+  \item Run \gls{ISR} processing and confirm quality of resulting images
+  \end{itemize}
+\item Repeat these operations at NCSA
+\end{itemize}

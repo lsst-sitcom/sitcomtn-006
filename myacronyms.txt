@@ -6,6 +6,8 @@
 # Example:
 #   MIA:Missing In Action
 CAP:Commissioning Activity Project
+cp_pipe:The DM package used to generate calibrations products (\eg master biases)
+DBB Buffer manager: OODS-aware transfer of data from Chile to the USDF
 EAS:Environmental Awareness System
 EUI:Engineering User Interface
 IM:Integration Milestone
