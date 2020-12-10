@@ -1,4 +1,4 @@
-\declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}
+\declareIM{b}{B}{2021-XX-YY}{ComCam Calibration Acquisition, Transfer, and Processing}
 
 Executive Summary:
 
@@ -7,21 +7,50 @@ Run ComCam from notebooks and the scriptQueue, with automated generation and cer
 \subsection{Goals of IM}
 \label{sec:org3154347}
 \begin{itemize}
-\item Triggering \gls{OCPS} processing from nublado/scriptQueue
-\item Automated generation and availability of ComCam master calibrations in Chile
-\item Use of \gls{RLS} and \gls{LOVE}
-\begin{itemize}
-\item including monitoring of data transfer to NCSA
-\end{itemize}
-\item Demonstration that the operator can cycle through states, bring
-the system up from \texttt{STANDBY}, and take data without any intervention from developers
-\item Monitor the health of the \gls{CCS} from the observatory environment (e.g. Chronograph/\gls{LOVE})
-\item Explore relationship between \gls{EFD} and Camera trending databases
-\item TAP/ADQL access to \gls{EFD} from \gls{RSP}
+	\item Triggering \gls{OCPS} processing from nublado/scriptQueue
+	\item Automated generation and availability of ComCam master calibrations in Chile
+	\item Use of \gls{RLS} and \gls{LOVE}
+	\begin{itemize}
+		\item including monitoring of data transfer to NCSA
+	\end{itemize}
+	\item Demonstration that the operator can cycle through states, bring
+	the system up from \texttt{STANDBY}, and take data without any intervention from developers
+	\item Monitor the health of the \gls{CCS} from the observatory environment (e.g. Chronograph/\gls{LOVE})
+	\item Explore relationship between \gls{EFD} and Camera trending databases
+	\item Query capability (TAP/ADQL) access to \gls{EFD} from \gls{RSP}
 \end{itemize}
 
 \subsection{Prerequisites}
 \begin{itemize}
-\item{\IM{a}}
+	\item{\IM{a} completed with functionality maintained}
+	\item{ComCam cold and functional with light source available for flat}
+\end{itemize}
+
+
+\subsection{Procedure}
+The following procedure is to be executed by an observing specialist. Assistance may be provided in the script editing and database querying by other commissioning team members.
+\begin{itemize}
+	\item Following a procedure, bring up the LOVE interface for ComCam
+	\item Using Nublado, without assistance from developers, the operator should bring ComCam to ENABLED from STANDBY
+	\item Take an OBJECT image using the \href{https://ts-observatory-control.lsst.io/py-api/lsst.ts.observatory.control.maintel.ComCam.html}{ComCam class}
+	\begin{itemize}
+		\item Verify functionality of the \gls{LOVE} interface, including the state and health
+		\item Display the raw image locally
+		\item Using the OCPS, perform basic \gls{ISR} on the image and wait for the result (e.g. "await ocps.process(visitID, task\_name)")
+		\item Display the ISR-corrected image
+		\item Monitor the transfer status and elapsed time between when the image is written on the summit to when it can be accessed at NCSA.
+	\end{itemize}	
+	\item Modify the script from \IM{a} used to take calibrations to also command the \gls{OCPS} to reduce the data
+	\begin{itemize}
+		\item Take \emph{only} a stack of $\sim$10 bias frames
+		\item Using the \gls{OCPS}, build a master bias from inside the script. Do not wait for the processing to finish 
+			\begin{itemize}
+				\item One could use "asyncio.future(ocps.process(visitID, task\_name))"
+			\end{itemize}
+		\item Ensure the bias builds and is certified % FIXME: HOW do we do this?
+	\end{itemize}
+	\item From the \gls{RSP}, query the local copy of the EFD and plot exposure time versus number since the start of this exercise
+	\item From the RSP, make the same plot using data from the Camera Trending Database
+	% FIXME: The above item requires futher detailing on how we exercise the CTD
 \end{itemize}
 
