@@ -5,39 +5,49 @@ Executive Summary:
 Run ComCam from notebooks, with generation and certification of ComCam calibrations
 
 \subsection{Goals of IM}
-\label{sec:orgbea7b56}
+
 \begin{itemize}
-\item Taking ComCam images in Chile using nublado
-\item Taking calibration and other images using the \gls{scriptQueue}
-\item Automatic ingestion into a gen3 butler in Chile
-\item Transfer over \gls{DBB Buffer manager} and the \gls{LHN} to a gen3 repo at NCSA
-\item Human generation and availability of master calibrations in Chile
-% \item EFD client access at NCSA
+	\item Taking ComCam images in Chile using nublado
+	\item Taking calibration and other images using the \gls{scriptQueue}
+	\item Automatic ingestion into a gen3 butler in Chile
+	\item Transfer over \gls{DBB Buffer manager} and the \gls{LHN} to a gen3 repo on the \gls{RSP}
+	\item Human generation and availability of master calibrations in Chile
 \end{itemize}
 
 \subsection{Prerequisites}
 \begin{itemize}
-\item{ComCam on summit}
-\begin{itemize}
-\item cold and functional
-\end{itemize}
-\item{gen3 butler ingestion for comCam}
+	\item{ComCam on summit}
+	\begin{itemize}
+		\item cold and functional
+		\item incoherent light source available to take flats
+	\end{itemize}
+	\item{gen3 butler ingestion for ComCam}
 \item{Nublado running in Chile}
 \end{itemize}
 
 \subsection{Procedure}
-\begin{itemize}
-\item Use nublado to take bias, dark, flat, and PTC calibration data
-\item Convert nublado cells to \gls{scriptQueue} and run them
-\item In Chile,
-  \begin{itemize}
-  \item Run gen3 \gls{cp_pipe} by hand from a nublado terminal
-    \begin{itemize}
-    \item Use ``auto-certify'' mode which assumes that the derived products are good
-    \item \Nb this results in the calibs being available for further use
-    \end{itemize}
-  \item Take further exposures, if possible with structured illumination
-  \item Run \gls{ISR} processing and confirm quality of resulting images
-  \end{itemize}
-\item Repeat these operations at NCSA
-\end{itemize}
+The following procedure is to be executed by a general commissioning team member. The script creation and scriptQueue requires a minor amount of training and may require assistance.
+\begin{enumerate}
+	\item Following a procedure, instantiate the OCS bridge
+	\item Using Nublado, bring to enabled state using Notebook
+	\item Using Nublado and the \href{https://ts-observatory-control.lsst.io/py-api/lsst.ts.observatory.control.maintel.ComCam.html}{ComCam class}:
+	\begin{enumerate}
+ 		\item Take a single OBJECT, BIAS, FLAT, DARK image
+ 		\item For each image, monitor event for CCCamera completion, monitor \gls{OODS} event saying image is ready, use butler to grab image, display image locally using Firefly/DS9 or camera display tool
+    \end{enumerate}	
+	\item In a notebook, create cells to take bias, dark, flat, and PTC calibration data
+	\item Convert Nublado cells to \gls{scriptQueue}, creating a ``standard Calibration'' script and execute them
+	\item From the Commissioning Cluster at the base:
+	\begin{enumerate}
+		\item Display one of each image type locally using Firefly/DS9 or camera display tool
+		\item Run gen3 \gls{cp_pipe} by hand from a Nublado terminal
+    	\begin{enumerate}
+    		\item Create master biases, flats, darks using ``auto-certify'' mode which assumes that the derived products are good \footnote{This results in the calibrations being available for use}
+    		\item Copy images to summit and include in summit Butler repo.
+    	\end{enumerate}
+  	\end{enumerate}
+ 	\item Take further exposures with structured illumination, preferably different from what was used to generate the flat.
+  	\item From the summit, run \gls{ISR} processing, display images and confirm new calibs are being applied
+	\item Once data is synced to NCSA via the \gls{LHN}, Repeat the generation of calibration images using the \gls{RSP}
+	\item Re-verify that \gls{RSP} generated calibration images can be used on the summit.
+\end{enumerate}

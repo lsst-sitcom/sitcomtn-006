@@ -2,7 +2,7 @@
 
 Executive Summary:
 
-Demonstrates ability to take and reduce AuxTel data using the scriptQueue
+Demonstrates ability to take and reduce AuxTel data using the scriptQueue.
 
 \subsection{Goals of IM}
 \begin{itemize}
@@ -11,15 +11,49 @@ Demonstrates ability to take and reduce AuxTel data using the scriptQueue
 \item Take data in a standard star field, including interactive re-centering
 \item Run AuxTel data analysis package in Chile and NCSA, triggered by \gls{OCPS}
 \begin{itemize}
-\item push results to \gls{EFD} (maybe??)
+\item Display results to operators % (may require publishing to EFD?)
 \end{itemize}
 \end{itemize}
 
 \subsection{Prerequisites}
 \begin{itemize}
-\item{\IM{b}}
-\item{AuxTel functional}
-\item{Available staff for night time operations}
-\item{User commenting in \gls{RLS} available}
+	\item{\IM{b} Completed}
+	\item{AuxTel and LATISS functional and ready to track a target. Rough focus should be achieved.}
+	\item{Available staff for night time operations}
+	\item{User commenting in \gls{RLS} available}
 \end{itemize}
 
+\subsection{Procedure}
+The following procedure is to be executed by an observing specialist.
+\begin{enumerate}
+	\item Using Nublado, slew to $\sim$~60 degree elevation target and start tracking
+	\item Using Nublado, measure the focus offset using the \href{https://github.com/lsst-ts/ts_externalscripts/blob/develop/python/lsst/ts/externalscripts/auxtel/latiss_cwfs_align.py}{CWFS focus script}, but launched from the notebook.
+	\item Annotate results using the \gls{RLS}
+	\item Apply the focus offset using the ATAOS, record the applied offset in the \gls{RLS}
+	\item Manually take a single OBJECT image:
+	\begin{enumerate}
+		\item Verify functionality of the \gls{LOVE} interface, including instrument setup and applied focus offset(s).
+		\item Using the \gls{OCPS}, perform basic \gls{ISR} on the image and wait for the result (e.g. "await ocps.process(visitID, task\_name)")
+		\item Display the image locally after running \gls{ISR}
+	\end{enumerate}	
+	\item Using the standard visit script launched from a notebook, slew to new target and perform automated acquisition only, script must have user verify offset prior to motion.
+	\item Perform the standard data taking sequence using the standard visit script
+	\item Perform a single image with the instrument in it's standard spectral mode, then send for reduction with the \gls{OCPS}. Wait for reduction to complete.
+	\item View the results locally in the notebook.
+	\item Perform a custom sequence using at least two items in the grating wheel and two in the filter wheel, all with different exposure times (\gls{OCPS} should only perform ISR)
+	\begin{enumerate}
+		\item Verify functionality of the \gls{LOVE} interface, including filter/grating changes/shutter movement, focus/pointing offsets, \gls{OCPS} status 
+		% Do we get any OCPS status? How do we monitor that?
+		\item Display the \gls{ISR} processed images locally as they are available
+		\item Monitor the transfer status and elapsed time between when the image is written on the summit to when it can be accessed from the \gls{RSP}.
+	\end{enumerate}	
+	\item Using the scriptQueue:
+		\begin{enumerate}
+			\item Perform standard observations of 3 targets spanning the elevation range sequentially, script must send data to \gls{OCPS} for reduction (but not await results)
+			\item Display extracted atmospheric parameters for each target % HOW?
+			\item Comment in \gls{RLS} about the weather or image quality
+			\item Perform same observations, but with a custom modified configuration (exposure time or filter adjustment)
+		\end{enumerate}
+	\item From the Base and the \gls{RSP}, redo reduction of scriptQueue visit data
+	\item From the Base and the \gls{RSP}, view the log and correlate comments against images.
+\end{enumerate}
