@@ -22,7 +22,7 @@
   \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
 }
 \makeatother
-
+\newcommand{\JIRA}[3]{\href{https://jira.lsstcorp.org/browse/#1-#2}{(\textcolor{blue}{#1-#2} #3})}
 
 %If you want glossaries
 \makeglossaries
