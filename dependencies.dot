@@ -1,0 +1,81 @@
+digraph
+{
+    #ratio = 0.7
+    {
+    # Hardware, external software component, or data product
+    node  [shape=hexagon]
+    ComCam
+    "ComCam donuts"
+    "Gen3 butler"
+    Nublado
+    AuxTel
+    LATISS
+    "MT mount"
+    "Image display"
+    LOVE
+    AOS
+    Hexapod
+    WEP
+
+    # Systems we have to write and integrate
+    node  [shape=ellipse]
+    OCPS
+    Logging
+    ScriptQueue
+
+    node [shape=box]
+    IM_a [label="IM1 ComCam img capture/archive" color=red]
+    IM_b [label="IM_b ComCam calib/processing. EFD"]
+    IM_c [label="IM_c AuxTel standard stars"]
+    IM_d [label="IM_d MT slew"]
+    IM_e [label="IM_e AuxTel full ops"]
+    IM_f [label="IM_f Corner raft AOS"]
+    IM_pg [label="IM_pg Standalone ComCam AOS"]
+    IM_g [label="IM_g ComCam AOS"]
+    IM_h [label="IM_h Simulated AOS"]
+    # IM_i [label="IM_i Commission AOS"]
+    # IM_j [label="IM_j AuxTel start/end night"]
+    # IM_k [label="IM_k LSSTcam img capture/archive"]
+    # IM_cbp [label="IM_cbp CBP"]
+    }
+
+Nublado -> IM_a
+"Gen3 butler" -> IM_a
+ComCam -> IM_a
+IM_b -> ScriptQueue [arrowhead=none color=green] # I.e. validated by this IM
+
+IM_b -> OCPS [arrowhead=none color=green] # I.e. validated by this IM
+IM_b -> Logging [arrowhead=none color=green] # I.e. validated by this IM
+
+AuxTel -> IM_c
+LATISS -> IM_c
+Logging -> IM_c
+OCPS -> IM_c
+IM_c -> ScriptQueue [arrowhead=none color=green] # I.e. validated by this IM
+
+AOS -> IM_d
+LOVE -> IM_d
+Logging -> IM_d
+"MT mount" -> IM_d
+
+"Image display" -> IM_e
+
+"ComCam donuts" -> IM_f
+"MT mount" -> IM_f
+"WEP" -> IM_f
+
+"ComCam donuts" -> IM_pg
+"WEP" -> IM_pg
+
+Hexapod -> IM_g
+
+ScriptQueue -> IM_h
+
+IM_a -> IM_b [color=blue] # -> IM_k
+IM_b -> IM_c -> IM_e [color=blue]
+IM_b -> IM_d -> IM_h [color=blue]
+# IM_b -> IM_cbp [color=blue]
+IM_f -> IM_h [color=blue]
+IM_f -> IM_g [color=blue]
+IM_pg -> IM_g [color=blue]
+}

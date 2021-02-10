@@ -17,7 +17,7 @@
   %    \declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}
   % where you refer to the IM as \IM{b} and it appears as IM_B
   %
-  \section{IM\texorpdfstring{$_{\text{#2}}$}{#2}: #4 (#3)}%
+  \section{IM\texorpdfstring{$_{\text{#2}}$}{#2} [#1]: #4 (#3)}%
   \label{IM:#1}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
 }
@@ -88,6 +88,29 @@ current \gls{OR} concept which tests the state of DM systems at a certain time r
 continued cross-subsystem functionality.  I envisage that an \gls{IM} would be followed by an \gls{OR} to test
 the deliverable, and to carry out an internal \gls{ORR} for the functionality delivered by the \gls{IM}.
 
+\subsection{Dependencies}
+
+\begin{figure}
+\begin{center}
+  %\rotatebox{90}{\includegraphics[width=1.1\textwidth]{dependencies}}
+  \hspace*{-0.15\textwidth}\includegraphics[width=1.3\textwidth]{dependencies}
+\end{center}
+\caption{
+  The dependencies between the IMs and other entities, either external hardware or software
+  (\eg ComCam, Nublado shown in hexagons), or systems being produced during the completion
+  of the Rubin system (\eg the \gls{OCPS}, shown in ellipses and whose first appearance
+  is shown as a green line).
+  The rectangular boxes are IMs; red means complete.  The blue arrows show IM's prerequisites,
+  and black arrows indicate other dependencies.
+  \hfil\break
+  Not all IMs are shown at this point.  The mapping to P6 is also omitted as it is not
+  yet clear enough to be useful (but see App. \ref{sec:P6Milestones}).
+}
+\label{fig:dependencies}
+\end{figure}
+
+% See Fig. \ref{fig:dependencies}.
+
 \newcommand{\inputIM}[1]{\vfil\eject\input{#1}}
 \inputIM{IMa}
 \inputIM{IMb}
@@ -101,9 +124,148 @@ the deliverable, and to carry out an internal \gls{ORR} for the functionality de
 \inputIM{IMi}
 \inputIM{IMj}
 \inputIM{IMk}
+\inputIM{IMcbp}  % == L
 \inputIM{IMbacklog}
 
 \appendix
+
+\section{Mapping to Milestones in P6}
+\label{sec:P6Milestones}
+
+This list of project milestones comes from
+\href{https://confluence.lsstcorp.org/pages/viewpage.action?pageId=62263966}{this page}
+on confluence; the descriptions are summarised from the same page.  We omit
+\textit{Integrate ComCam on Hexapod-Rotator and Install on TMA},
+\textit{Technical Operations Optimization 1-3},
+and
+\textit{Engineering Punch-list Resolution} milestones.
+
+\subsection{on-Telescope ComCam TCS + CCS Interface \& Functional Tests}
+
+\begin{itemize}
+\item
+  TCS functional testing of ComCam configuration (Load in guider and WFS applications, check high level functionality/operation without data acquisition )
+\item
+  CCS functional testing of ComCam - configuration update, shutter testing, filter changer, temperature control, data acquisition, data display, setup of trending analysis. Most of these have to be done as a function of telescope position
+\end{itemize}
+Prerequisites: \IM{b}, \IM{g}
+
+\subsection{on-Telescope ComCam CCS + OCS Interface \& Functional Tests}
+
+\begin{itemize}
+\item LSE-71 verification - (filter, shutter, image acquisition commands etc)
+\item Observatory mode testing (e.g. calibration, daytime, nighttime ops, engineering mode)
+\item CCS communication with EFD and observatory clock
+\item OCS Sequencer testing (e.g. take flat field sequence)
+\end{itemize}
+Prerequisites: \IM{b}
+
+\subsection{on-Telescope ComCam CCS + DAQ + DMS Interface \& Functional Tests}
+\begin{itemize}
+\item Take image (start with a bias) and send through DMS
+\item Test on-summit data access portal, Commissioning Cluster data access
+\item Test archiving speeds, network speeds/lags, start long-term monitoring
+\item Test header service
+\item Test EFD access
+\item Repeat for all normal exposure types (broadband flats, monochromatic flats, darks, dome-closed "on-sky" image, CBP image
+\item Attempt ingestion into pipelines to verify header service/EFD access (captured in CPP activity)
+\item Test base-facility connection loss/recovery
+\item Test base-facility to NCSA connection loss/recovery
+\item Test grid-power loss
+\item A stretched goal is to exercise the interface between the DAQ and potentially both the guider and the wfs
+\end{itemize}
+Prerequisites: \IM{b}, \IM{cbp}.  \IM{g} for stretch goal.
+
+\subsection{ComCam Electro-Optical Tests 1}
+
+\begin{itemize}
+\item Master Bias Creation - 30 minutes of data collection ($\sim$100 images at 15s cadence)
+\item Gain value verification - ?do on 3 filters once? - assume half a day - flat field Photon transfer curve
+\item Linearity Verification - same data set as above
+\item Saturation Determination () - same as above - but doesn't infer when bleeding occurs
+\item Master Dark creation () - 10x300s, 10x30s, 10x60s,10x120s, 10x600s = 11100s = 3 hours
+\item Master Impure Broadband Flats () - 1 hour for 5/6 filters
+\item Master Impure Monochromatic Flats (4 hours per filter + 8 hours for no filter (assume 2 hours but needs to be done $\sim$ 4 times depending on separation between filter tests)
+\end{itemize}
+Prerequisites: \IM{b}.
+
+\subsection{Collimated Beam Projector Scripting Tests}
+
+\begin{itemize}
+\item Image Quality Checks as a function of telescope Elevation to validate FEA models
+\item short un-guided images
+\item Analysis of data
+\item Develop automated pointing model builder
+\item Point Model Building - 50 iterations
+\item Acquire image of known star
+\item Centroid and offset to pixel X,Y
+\item Verify star position at pixel X,Y
+\item Move to next target
+\item Do touch ups over multiple nights ($\sim$1 hour per night for 5 nights)
+\end{itemize}
+Prerequisites: \IM{cbp}.
+
+\subsection{Initial OCS + TCS + CCS Guider Interface \& Functional Tests}
+
+Initial TCS + DAQ WFS Interface Tests
+\begin{itemize}
+\item obtain in+intra+extra focal images and feed through wavefront analysis system
+\item generate AOS offsets, correlate with observing conditions (e.g. atl/az, temp, hum)
+\item update look up tables, re-check
+\item verify offsets are being propogated properly (purposely deform and measure effect)
+\item attempt stress the system over wide range of conditions
+\end{itemize}
+Prerequisites: pointing model, \IM{b}, \IM{g}
+  
+\subsection{ComCam Electro-Optical Tests 2}
+
+\begin{itemize}
+\item ghosties and ghoulies
+\item Master Impure and Pure "Monochromatic" Flats
+\item Master Photoflats, Master Low-resolution narrowband Flats
+\item strip-chart imaging to measure slew/settle motions/times.
+\item Try scheduled driven observing with ComCam - digests telemetry, feeds targets, logs observations
+\end{itemize}
+Prerequisites: \IM{b}, \IM{g}
+
+\subsection{Build Initial AOS Look-up Table}
+
+The Look-up-table has been verified on axis during T\&S AIV with the high speed camera. This test extend the verification of the lookup table to the wider ComCam field of view
+
+\begin{itemize}
+\item Conduct the initial alignment using the laser tracker
+\item Execute script driven sampling of telescope optical deformation by measuring IQ as a function of elevation (and azimuth). The use case is described in the use case document (here)
+\item Obtain force offsets to adjust optics for each elevation (and azimugh)
+\item Update/build look up table as a function of elevation (and azimuth)
+\end{itemize}
+Prerequisites: \IM{b}, \IM{g}
+
+\subsection{AOS Data Analysis 1}
+
+\begin{itemize}
+\item Track IQ, wavefront and AOS telemetry over history to date (1-2 weeks)
+\item update look up tables expanding to environmental conditions (temp, hum, wind)
+  This is done in parallel with the task above
+\end{itemize}
+Prerequisites: \IM{b}
+
+\subsection{ComCam Electro-Optical Tests 3}
+
+\begin{itemize}
+\item Combined testing of on-sky data with AT and ComCam - with supporting telemetry (all-sky cameras, dimm, PWV etc)
+\item Try scheduled driven observing with ComCam (excercising level 2)
+\item Comparison of star flat to CBP flat, ghost characterization investigation, filter QA system setup/measurement
+\end{itemize}
+Prerequisites: \IM{b}, \IM{g}, \IM{cbp}
+
+\subsection{Initial AOS Performance Verification}
+
+\begin{itemize}
+\item track IQ, wavefront and AOS telemetry over history to date ($\sim$1 month)
+\item update look up tables
+\end{itemize}
+Prerequisites: \IM{b}
+
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
 \section{References} \label{sec:bib}

@@ -54,3 +54,20 @@ The following procedure is to be executed by a general commissioning team member
 	\item Once data is synced to NCSA via the \gls{LHN}, Repeat the generation of calibration images using the \gls{RSP}
 	\item Re-verify that \gls{RSP} generated calibration images can be used on the summit.
 \end{enumerate}
+
+\subsection{Status}
+
+\begin{description}
+   \item[2021-02-08]
+        Tested using AuxTel
+        \begin{itemize}
+                \item Images taken using nublado and \gls{scriptQueue}
+                  (no demonstration of calibrations with \gls{scriptQueue})
+                \item Automatic ingestion into gen3 butler in Chile
+                  (no demonstration of functional rerun/calibrations)
+                \item Transfer to NCSA and ingestion in gen3 butler visible from \gls{RSP}
+                \item Calibs (bias, dark) generated in Chile and used with gen2 butler
+                  (exposing a per-day lookup bug in gen2 butler)
+        \end{itemize}
+   \end{description}
+        

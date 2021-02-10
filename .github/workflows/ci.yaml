@@ -22,6 +22,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "lander<2.0.0"
 
+      - name: Graphviz install
+        run: sudo apt-get install graphviz
+
       - name: TeX build
         run: |
           docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make'
