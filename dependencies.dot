@@ -11,7 +11,8 @@ digraph
     AuxTel
     LATISS
     "MT mount"
-    "Image display"
+    "Raw Image display"
+    "Reduced Image display"
     LOVE
     AOS
     Hexapod
@@ -46,19 +47,21 @@ IM_b -> ScriptQueue [arrowhead=none color=green] # I.e. validated by this IM
 
 IM_b -> OCPS [arrowhead=none color=green] # I.e. validated by this IM
 IM_b -> Logging [arrowhead=none color=green] # I.e. validated by this IM
+"Raw Image display" -> IM_b
 
 AuxTel -> IM_c
 LATISS -> IM_c
-Logging -> IM_c
+IM_c -> Logging [arrowhead=none color=green] # I.e. validated by this IM
 OCPS -> IM_c
 IM_c -> ScriptQueue [arrowhead=none color=green] # I.e. validated by this IM
+"Raw Image display" -> IM_c
 
 AOS -> IM_d
 LOVE -> IM_d
 Logging -> IM_d
 "MT mount" -> IM_d
 
-"Image display" -> IM_e
+"Reduced Image display" -> IM_e
 
 "ComCam donuts" -> IM_f
 "MT mount" -> IM_f
