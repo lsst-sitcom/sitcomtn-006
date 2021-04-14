@@ -1,4 +1,4 @@
-\declareIM{pg}{pre-G}{2021-XX-YY}{Standalone ComCam AOS}
+\declareIM{pg}{pre-G}{2021-05-15}{Standalone ComCam AOS}
 Executive Summary:
 ​
 Process phosim Intra/Extra simulated ComCam images with the MTAOS.
@@ -11,24 +11,21 @@ Assuming that the images where acquired and ingested previously, drive the MTAOS
 Demonstrate ability to:
 ​
 \begin{itemize}
-\item Have MTAOS process images, triggered by appropriate commands, and publish
+\item Have MTAOS process images and publish
   \texttt{\{\{camera,m2\}Hexapod,\{m1m3,m2\}\}Correction} events
 \end{itemize}
 ​
 \subsection{Prerequisites}
 \begin{itemize}
-\item PhoSim images with donuts from ComCam ingested into a butler repo.
+\item \IM{ppg}
 \item Working version of MTAOS with access to a butler repo containing simulated ingested data.
-\item Working version of wavefront estimation pipeline (wep). 
 \end{itemize}
 
 \subsection{Procedure}
 \begin{itemize}
 \item Generate and ingest simulated images with desired pistons (e.g. $[0, -10, 0, 10, 0]$) and appropriate
   metadata
-\item Manually issue commands to AOS system to process the data; in \IM{g} we will generate these
-  commands from the \gls{scriptQueue}, triggered by \gls{OODS} events.
-    \Nb we may need an extra config file for this IM providing information which will
-    come from SAL in \IM{g}
+\item As for \IM{ppg} get data from the butler and generate Zernikes, using OCPS to run the pipeline
+\item Trigger MTAOS to compute updates for Camera Hexapod, M2 Hexapod, M1M3, M2, 
 \item Check that desired events are in the EFD
 \end{itemize}

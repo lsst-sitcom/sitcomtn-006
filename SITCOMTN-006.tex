@@ -10,6 +10,7 @@
 \newcommand{\cf}{\textit{cf.}\xspace}
 
 \newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}}
+\newcommand{\IMdate}[1]{\csname dateIM#1\endcsname}
 \makeatletter
 \newcommand{\declareIM}[4]{%
   % \declareIM{label}{short name}{date}{title}
@@ -20,6 +21,7 @@
   \section{IM\texorpdfstring{$_{\text{#2}}$}{#2} [#1]: #4 (#3)}%
   \label{IM:#1}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname dateIM#1\endcsname}{#3}}%
 }
 \makeatother
 \newcommand{\JIRA}[3]{\href{https://jira.lsstcorp.org/browse/#1-#2}{(\textcolor{blue}{#1-#2} #3})}
@@ -117,15 +119,16 @@ the deliverable, and to carry out an internal \gls{ORR} for the functionality de
   \begin{tabular}{l|c|l}
     IM & Completion Date & Comments \\
     \hline
-    \IM{a} & 2021-03-19 \\
-    \IM{b} & 2021-03-31 & OCPS will be tight; slip logging \\
-    \IM{c} & 2021-03-31 & OCPS will be tight; slip logging \\
-    \IM{d} & 2021-05-31 & \\
-    \IM{e} & & \\
-    \IM{f} & 2021-04-15 & In parallel with \IM{pg} \\
-    \IM{pg} & 2021-04-15 & In parallel with \IM{f} \\
-    \IM{g} & 2021-07-31 \\
-    \IM{h} & 2021-09-31 \\
+    \IM{a} & \IMdate{a} \\
+    \IM{b} & \IMdate{b} & OCPS will be tight; slip logging \\
+    \IM{c} & \IMdate{c} & OCPS will be tight; slip logging \\
+    \IM{d} & \IMdate{d} & \\
+    \IM{e} & \IMdate{e} & \\
+    \IM{f} & \IMdate{f} & In parallel with \IM{pg} \\
+    \IM{ppg} & \IMdate{ppg} & In parallel with \IM{f} \\
+    \IM{pg} & \IMdate{pg} & In parallel with \IM{f} \\
+    \IM{g} & \IMdate{g} \\
+    \IM{h} & \IMdate{h} \\
   \end{tabular}
 \end{center}
 
@@ -139,6 +142,7 @@ put ComCam on the TMA (without mirrors).
 \inputIM{IMd}
 \inputIM{IMe}
 \inputIM{IMf}
+\inputIM{IMppg}
 \inputIM{IMpg}
 \inputIM{IMg}
 \inputIM{IMh}

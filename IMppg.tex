@@ -1,0 +1,27 @@
+\declareIM{ppg}{pre-pre-G}{2021-04-23}{Standalone ComCam AOS}
+Executive Summary:
+​
+Demonstrate the processing of wave front images for ComCam from raw to Zernikes.
+
+\textbf{Does not map to P6}
+​
+\subsection{Goals of IM}
+​
+Demonstrate ability to:
+​
+\begin{itemize}
+\item Have MTAOS process images and generate Zernike coefficients
+\end{itemize}
+​
+\subsection{Prerequisites}
+\begin{itemize}
+\item PhoSim images with donuts from ComCam ingested into a butler repo.
+\item Working version of wavefront estimation pipeline (wep). 
+\end{itemize}
+
+\subsection{Procedure}
+\begin{itemize}
+\item Generate and ingest simulated images with desired pistons (e.g. $[0, -10, 0, 10, 0]$) and appropriate
+  metadata
+\item Run a Gen-3 pipeline to read from the butler, run the ISR, process the donuts, and generate Zernikes.
+\end{itemize}
