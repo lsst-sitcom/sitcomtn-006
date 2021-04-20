@@ -1,4 +1,4 @@
-\declareIM{pg}{pre-G}{2021-05-15}{Standalone ComCam AOS}
+\declareIM{pg}{pre-G}{2021-05-15}{AOS using ComCam, commanding MT}{AOS MT}
 Executive Summary:
 ​
 Process phosim Intra/Extra simulated ComCam images with the MTAOS.
@@ -28,4 +28,14 @@ Demonstrate ability to:
 \item As for \IM{ppg} get data from the butler and generate Zernikes, using OCPS to run the pipeline
 \item Trigger MTAOS to compute updates for Camera Hexapod, M2 Hexapod, M1M3, M2, 
 \item Check that desired events are in the EFD
+\end{itemize}
+
+\subsection{Acceptance Criteria}
+\begin{itemize}
+\item A member of SITCom must be able to carry out these operations at NCSA without installing any
+  software for themselves.  This need not be done using RSP; a login shell on \eg \texttt{lsst-devl3}
+  would be acceptable.
+\item Confirm that the results are as expected.  This should be carried out using a notebook on the RSP,
+  in which case it \textit{is} acceptable to require the tester to install the notebook from \texttt{git}
+  themselves due to restrictions on the packages available on the RSP.
 \end{itemize}

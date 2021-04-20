@@ -11,17 +11,21 @@
 
 \newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}}
 \newcommand{\IMdate}[1]{\csname dateIM#1\endcsname}
+\newcommand{\IMsummary}[1]{\csname summaryIM#1\endcsname}
 \makeatletter
-\newcommand{\declareIM}[4]{%
-  % \declareIM{label}{short name}{date}{title}
+\newcommand{\declareIM}[5]{%
+  % \declareIM{label}{short name}{date}{title}{short title}
   % e.g.
-  %    \declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}
+  %    \declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}{CC Capture/Archive}
   % where you refer to the IM as \IM{b} and it appears as IM_B
+  % Also \IMdate{b}
+  % Also \IMsummary{b}
   %
   \section{IM\texorpdfstring{$_{\text{#2}}$}{#2} [#1]: #4 (#3)}%
   \label{IM:#1}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname dateIM#1\endcsname}{#3}}%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname summaryIM#1\endcsname}{#5}}%
 }
 \makeatother
 \newcommand{\JIRA}[3]{\href{https://jira.lsstcorp.org/browse/#1-#2}{(\textcolor{blue}{#1-#2} #3})}
@@ -116,19 +120,19 @@ the deliverable, and to carry out an internal \gls{ORR} for the functionality de
 \section{Schedule}
 
 \begin{center}
-  \begin{tabular}{l|c|l}
-    IM & Completion Date & Comments \\
+  \begin{tabular}{ll|c|l}
+    IM & & Completion Date & Comments \\
     \hline
-    \IM{a} & \IMdate{a} \\
-    \IM{b} & \IMdate{b} & OCPS will be tight; slip logging \\
-    \IM{c} & \IMdate{c} & OCPS will be tight; slip logging \\
-    \IM{d} & \IMdate{d} & \\
-    \IM{e} & \IMdate{e} & \\
-    \IM{f} & \IMdate{f} & In parallel with \IM{pg} \\
-    \IM{ppg} & \IMdate{ppg} & In parallel with \IM{f} \\
-    \IM{pg} & \IMdate{pg} & In parallel with \IM{f} \\
-    \IM{g} & \IMdate{g} \\
-    \IM{h} & \IMdate{h} \\
+    \IM{a} & \IMsummary{a} & \IMdate{a} \\
+    \IM{b} & \IMsummary{b} & \IMdate{b} & OCPS will be tight; slip logging \\
+    \IM{c} & \IMsummary{c} & \IMdate{c} & OCPS will be tight; slip logging \\
+    \IM{d} & \IMsummary{d} & \IMdate{d} & \\
+    \IM{e} & \IMsummary{e} & \IMdate{e} & \\
+    \IM{f} & \IMsummary{f} & \IMdate{f} & In parallel with \IM{pg} \\
+    \IM{ppg} & \IMsummary{ppg} & \IMdate{ppg} & In parallel with \IM{f} \\
+    \IM{pg} & \IMsummary{pg} & \IMdate{pg} & In parallel with \IM{f} \\
+    \IM{g} & \IMsummary{g} & \IMdate{g} \\
+    \IM{h} & \IMsummary{h} & \IMdate{h} \\
   \end{tabular}
 \end{center}
 

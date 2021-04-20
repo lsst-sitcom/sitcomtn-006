@@ -1,4 +1,4 @@
-\declareIM{ppg}{pre-pre-G}{2021-04-23}{Standalone ComCam AOS}
+\declareIM{ppg}{pre-pre-G}{2021-04-30}{AOS using ComCam; Zernikes}{AOS Zernikes}
 Executive Summary:
 ​
 Demonstrate the processing of wave front images for ComCam from raw to Zernikes.
@@ -10,7 +10,7 @@ Demonstrate the processing of wave front images for ComCam from raw to Zernikes.
 Demonstrate ability to:
 ​
 \begin{itemize}
-\item Have MTAOS process images and generate Zernike coefficients
+\item Process Defocussed Images and Generate Zernike coefficients
 \end{itemize}
 ​
 \subsection{Prerequisites}
@@ -21,7 +21,29 @@ Demonstrate ability to:
 
 \subsection{Procedure}
 \begin{itemize}
-\item Generate and ingest simulated images with desired pistons (e.g. $[0, -10, 0, 10, 0]$) and appropriate
-  metadata
-\item Run a Gen-3 pipeline to read from the butler, run the ISR, process the donuts, and generate Zernikes.
+\item Generate and ingest simulated images with desired pistons ($[0, -1.5, 0, 1.5, 0]$ mm)
+  and appropriate
+  metadata in each image:
+  \begin{itemize}
+  \item Boresight and rotator angle
+  \item Piston from camera hexapod
+  \end{itemize}
+\item Run a Gen3 pipeline from the command line that:
+  \begin{itemize}
+  \item gets data from the butler
+  \item runs the ISR
+  \item finds and process isolated donuts
+  \item estimates the wavefront in terms of annular Zernikes from each pair of donuts
+  \item average the resulting Zernikes over the stars in the field.
+  \end{itemize}
+  \item uses the butler to put the description of the wavefront to disk
+\end{itemize}
+
+\subsection{Acceptance Criteria}
+\begin{itemize}
+\item A member of SITCom must be able to carry out these operations at NCSA.
+  This need not be done using RSP; a login shell on \eg \texttt{lsst-devl3} is acceptable, and
+  the SITCom member may be required to install and build packages from \texttt{git}.
+\item Confirm that the results are as expected.  This should be carried out using a notebook on the RSP,
+  and the tester may be required to install the notebook from \texttt{git}.
 \end{itemize}
