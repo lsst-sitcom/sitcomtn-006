@@ -1,0 +1,47 @@
+\declareIM{ppf}{pre-pre-F}{2021-06-04}{AOS using Corner raft}{AOS Corner}
+Executive Summary:
+​
+Demonstrate the processing of wave front images for raw corner raft \texttt{SW0/1} simulated data
+to Zernikes.
+
+\textbf{Does not map to P6}
+​
+\subsection{Goals of IM}
+​
+Demonstrate ability to:
+​
+\begin{itemize}
+\item Process corner raft Images and Generate Zernike coefficients
+\end{itemize}
+​
+\subsection{Prerequisites}
+\begin{itemize}
+\item PhoSim images with donuts from \texttt{SW0/1} ingested into a butler repo.
+\item Working version of wavefront estimation pipeline (wep). 
+\end{itemize}
+
+\subsection{Procedure}
+\begin{itemize}
+\item Generate and ingest simulated image and appropriate metadata.
+  \begin{itemize}
+  \item Boresight and rotator angle
+  \item Piston from camera hexapod
+  \end{itemize}
+\item Run a Gen3 pipeline from the command line that:
+  \begin{itemize}
+  \item gets data from the butler
+  \item runs the ISR
+  \item finds and process isolated donuts
+  \item average the resulting Zernikes over the stars in the field.
+  \end{itemize}
+  \item uses the butler to put the description of the wavefront to disk
+\end{itemize}
+
+\subsection{Acceptance Criteria}
+\begin{itemize}
+\item A member of SITCom must be able to carry out these operations at NCSA.
+  This need not be done using RSP; a login shell on \eg \texttt{lsst-devl3} is acceptable, and
+  the SITCom member may be required to install and build packages from \texttt{git}.
+\item Confirm that the results are as expected.  This should be carried out using a notebook on the RSP,
+  and the tester may be required to install the notebook from \texttt{git}.
+\end{itemize}
