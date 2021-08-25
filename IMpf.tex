@@ -1,0 +1,41 @@
+\declareIM{pf}{pre-F}{2021-08-26}{AOS using Corner Raft, commanding MT}{AOS MT}
+Executive Summary:
+​
+Process phosim Intra/Extra simulated Corner Raft images with the MTAOS.
+Assuming that the images where acquired and ingested previously, drive the MTAOS through the data processing steps and produce corrections.
+
+\textbf{Does not map to P6}
+​
+\subsection{Goals of IM}
+​
+Demonstrate ability to:
+​
+\begin{itemize}
+\item Have MTAOS process images and publish
+  \texttt{\{\{camera,m2\}Hexapod,\{m1m3,m2\}\}Correction} events
+\end{itemize}
+​
+\subsection{Prerequisites}
+\begin{itemize}
+\item \IM{ppg}
+\item Working version of MTAOS with access to a butler repo containing simulated ingested data.
+\end{itemize}
+
+\subsection{Procedure}
+\begin{itemize}
+\item Generate and ingest simulated images with desired pistons (e.g. $[0, -10, 0, 10, 0]$) and appropriate
+  metadata
+\item As for \IM{ppf} get data from the butler and generate Zernikes, using OCPS to run the pipeline
+\item Trigger MTAOS to compute updates for Camera Hexapod, M2 Hexapod, M1M3, M2, 
+\item Check that desired events are in the EFD
+\end{itemize}
+
+\subsection{Acceptance Criteria}
+\begin{itemize}
+\item A member of SITCom must be able to carry out these operations at NCSA without installing any
+  software for themselves.  This need not be done using RSP; a login shell on \eg \texttt{lsst-devl3}
+  would be acceptable.
+\item Confirm that the results are as expected.  This should be carried out using a notebook on the RSP,
+  in which case it \textit{is} acceptable to require the tester to install the notebook from \texttt{git}
+  themselves due to restrictions on the packages available on the RSP.
+\end{itemize}

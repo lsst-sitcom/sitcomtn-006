@@ -1,0 +1,145 @@
+\documentclass[SE,authoryear,toc]{lsstdoc}
+% lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
+\input{meta}
+
+% Package imports go here.
+\usepackage{xspace}
+
+% Local commands go here.
+\renewcommand{\c}{\textit{c.}\xspace}
+\newcommand{\cf}{\textit{cf.}\xspace}
+
+\newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}}
+\newcommand{\IMdate}[1]{\csname dateIM#1\endcsname}
+\newcommand{\IMsummary}[1]{\csname summaryIM#1\endcsname}
+\makeatletter
+\newcommand{\declareIM}[5]{%
+  % \declareIM{label}{short name}{date}{title}{short title}
+  % e.g.
+  %    \declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}{CC Capture/Archive}
+  % where you refer to the IM as \IM{b} and it appears as IM_B
+  % Also \IMdate{b}
+  % Also \IMsummary{b}
+  %
+  \section{IM\texorpdfstring{$_{\text{#2}}$}{#2} [#1]: #4 (#3)}%
+  \label{IM:#1}%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname dateIM#1\endcsname}{#3}}%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname summaryIM#1\endcsname}{#5}}%
+}
+\makeatother
+\newcommand{\JIRA}[3]{\href{https://jira.lsstcorp.org/browse/#1-#2}{(\textcolor{blue}{#1-#2} #3})}
+
+%If you want glossaries
+\makeglossaries
+\input{aglossary.tex}
+\glsunsetall  % never expand acronyms
+\iftrue\else % colour rather than box acronyms
+   \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}
+   \renewcommand*{\glstextformat}[1]{\textcolor{red}{#1}}
+\fi
+
+\title{Integration Milestones}
+
+% Optional subtitle
+\setDocSubtitle{Status as of 2021-08-01}
+
+\author{%
+Robert Lupton
+}
+
+\setDocRef{SITCOMTN-006}
+\setDocUpstreamLocation{\url{https://github.com/lsst-sitcom/sitcomtn-006}}
+
+\date{\vcsDate}
+
+% Optional: name of the document's curator
+% \setDocCurator{The Curator of this Document}
+
+\setDocAbstract{%
+  The status of the Rubin Integration Milestones effort as of August 2021:
+  \begin{itemize}
+  \item AuxTel on the air
+  \item Routine ComCam/LATISS calibration data taken with from Nublado
+  \item Generation of Zernikes from phosim images
+  \end{itemize}
+}
+
+% Change history defined here.
+% Order: oldest first.
+% Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
+% See LPM-51 for version number policy.
+\setDocChangeRecord{%
+  \addtohist{1}{YYYY-MM-DD}{Unreleased.}{Robert Lupton}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Status}
+
+The status of the Rubin Integration Milestones effort as of 2021-08-01:
+\begin{itemize}
+\item AuxTel observing
+  \begin{itemize}
+  \item Continuing problems with the telescope (\eg mirror supports)
+  \item Automatic ingestion into Gen2/Gen3 in Chile (T\&S code needs to convert to Gen3; this is trivial)
+  \item Automatic transfer to NCSA and ingestion into Gen3
+  \item DM processing of data available (port to Gen3 nearly complete) but not automated
+  \item No visualisation of data quality or logging with LOVE
+  \end{itemize}
+  
+\item Routine ComCam/LATISS calibration data
+  \begin{itemize}
+  \item Currently taken using Nublado (\nb taking data from ComCam is not currently reliable)
+  \item Taking a subset of needed data using the script queue and processing using OCPS is demonstrated
+    but not delivered to SITCom
+  \item Automated quality verification nearly ready for biases/darks/flats/PTC curves
+  \end{itemize}
+
+\item AOS integration
+  \begin{itemize}
+  \item Running wavefront estimation on simulated comCam images
+    \begin{itemize}
+    \item Blockers on running wavefront estimation on simulated wavefront images resolved
+    \end{itemize}
+  \item Running MTAOS systems based on simulated comCam images (I think!)
+  \end{itemize}
+
+\end{itemize}
+
+\section{Missing Functionality}
+
+\begin{itemize}
+    \item DAQ playback
+    \begin{itemize}
+    \item The ability to retrieve simulated images (on the NTS or in Chile) is known to be broken
+      \begin{itemize}
+      \item This prevents us from testing OCPS on the test stands
+      \item This prevents us from carrying out IM$_{g}$ (AOS using ComCam, commanding MT)
+      \end{itemize}
+    \end{itemize}
+
+  \item Logging
+    \begin{itemize}
+    \item An API to log from notebooks is available, but not tested/employed in anger for AuxTel
+    \end{itemize}
+
+  \item Visualisation
+    \begin{itemize}
+    \item We are not using LOVE to display \eg the status of calibration frames or AuxTel image quality.
+      There is a group, ``FAFF'' working on this general issue.
+    \end{itemize}
+    
+  \item Data processing on the commissioning cluster (CC)
+    \begin{itemize}
+    \item This is waiting on upgrading the software to match that at NCSA (or possibly SLAC)
+      \begin{itemize}
+      \item Using the CC may require extending the OCPS's scope
+      \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+
+\end{document}
