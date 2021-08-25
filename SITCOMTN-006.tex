@@ -119,26 +119,32 @@ the deliverable, and to carry out an internal \gls{ORR} for the functionality de
 
 \section{Schedule}
 
-\begin{center}
-  \begin{tabular}{ll|c|l}
-    IM & & Completion Date & Comments \\
-    \hline
-    \IM{a} & \IMsummary{a} & \IMdate{a} \\
-    \IM{ppg} & \IMsummary{ppg} & \IMdate{ppg} & In parallel with \IM{f} \\
-    \IM{pg} & \IMsummary{pg} & \IMdate{pg} & In parallel with \IM{f} \\
-    \IM{b} & \IMsummary{b} & \IMdate{b} & OCPS will be tight; slip logging \\
-    \IM{c} & \IMsummary{c} & \IMdate{c} & OCPS will be tight; slip logging \\
-    \IM{f} & \IMsummary{f} & \IMdate{f} & In parallel with \IM{pg} \\
-    \IM{f} & \IMsummary{ppf} & \IMdate{f} & In parallel with \IM{pg} \\
-    \IM{g} & \IMsummary{g} & \IMdate{g} \\
-    \IM{d} & \IMsummary{d} & \IMdate{d} & \\
-    \IM{e} & \IMsummary{e} & \IMdate{e} & \\
-    \IM{h} & \IMsummary{h} & \IMdate{h} \\
-  \end{tabular}
-\end{center}
-
-Those are pretty aggressive dates, but they are completed \textit{just} before we 
-put ComCam on the TMA (without mirrors).
+\hspace{-0.15\textwidth}
+\begin{tabular}{ll|c|c|p{0.29\textwidth}|p{0.25\textwidth}}
+  IM & & Sim? & Target Date & Completion & Comments \\
+  \hline
+  \IM{a} & \IMsummary{a} & N & \IMdate{a} & \textit{c.} 2021-05-01 & \\
+  \IM{c} & \IMsummary{c} & N & \IMdate{c} & \textit{c.} 2021-06 & no logging \\
+  \IM{ppg} & \IMsummary{ppg} & Y & \IMdate{ppg} & \textit{c.} 2021-06-24 & In parallel with \IM{f} \\
+  \IM{b} & \IMsummary{b} & N & \IMdate{b} & 2021-08-01 only biases & no logging \\
+  \IM{d} & \IMsummary{d} & Y & \IMdate{d} & 2021-08-05 & \\
+  \IM{pg} & \IMsummary{pg} & Y & \IMdate{pg} & 2021-08-19 (Tiago to provide docs) & In parallel with \IM{f} \\
+  \IM{ppf} & \IMsummary{ppf} & Y & \IMdate{ppf} & 2021-08-19 (if all 4 corner rafts OK) & \\
+  \IM{pf} & \IMsummary{pf} & Y & \IMdate{pf} & & In parallel with \IM{pg} \\
+  \IM{f} & \IMsummary{f} & Y & \IMdate{f} & & In parallel with \IM{g} \\
+  \IM{g} & \IMsummary{g} & Y & \IMdate{g} & & Blocked by DAQ playback \\
+  \IM{e} & \IMsummary{e} & N & \IMdate{e} & & \\
+  \IM{h} & \IMsummary{h} & Y & \IMdate{h} & & Blocked by DAQ playback \\
+  \IM{pm} & \IMsummary{pm} & Y/N & \IMdate{pm} & & \\
+  \IM{m} & \IMsummary{m} & N & \IMdate{m} & & \\
+  \IM{n} & \IMsummary{n} & N & \IMdate{n} & & \\
+  \IM{o} & \IMsummary{o} & N & \IMdate{o} & & \\
+  \hline
+  \IM{i} & \IMsummary{i} & Y & \IMdate{i} & & \\
+  \IM{j} & \IMsummary{j} & N & \IMdate{j} & & \\
+  \IM{k} & \IMsummary{k} & Y & \IMdate{k} & & \\
+  \IM{cbp} & \IMsummary{cbp} & N & \IMdate{cbp} & & \\
+\end{tabular}
 
 \newcommand{\inputIM}[1]{\vfil\eject\input{#1}}
 \inputIM{IMa}
@@ -147,6 +153,7 @@ put ComCam on the TMA (without mirrors).
 \inputIM{IMd}
 \inputIM{IMe}
 \inputIM{IMppf}
+\inputIM{IMpf}
 \inputIM{IMf}
 \inputIM{IMppg}
 \inputIM{IMpg}
@@ -156,6 +163,10 @@ put ComCam on the TMA (without mirrors).
 \inputIM{IMj}
 \inputIM{IMk}
 \inputIM{IMcbp}  % == L
+\inputIM{IMpm}
+\inputIM{IMm}
+\inputIM{IMn}
+\inputIM{IMo}
 \inputIM{IMbacklog}
 
 \appendix
