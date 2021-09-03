@@ -9,7 +9,8 @@
 \renewcommand{\c}{\textit{c.}\xspace}
 \newcommand{\cf}{\textit{cf.}\xspace}
 
-\newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}}
+\newcommand{\IM}[1]{\hyperref[IM:#1]{\color{blue}IM$_{\text{\csname nameIM#1\endcsname}}$}\gdef\thisIM{#1}}
+\newcommand{\IMcompletion}[1]{\csname completionIM#1\endcsname}
 \newcommand{\IMdate}[1]{\csname dateIM#1\endcsname}
 \newcommand{\IMsummary}[1]{\csname summaryIM#1\endcsname}
 \makeatletter
@@ -18,15 +19,32 @@
   % e.g.
   %    \declareIM{b}{B}{2021-XX-YY}{ComCam Image Capture and Archive}{CC Capture/Archive}
   % where you refer to the IM as \IM{b} and it appears as IM_B
+  % Also \IMcompletion{b} (set by \completeIM)
   % Also \IMdate{b}
   % Also \IMsummary{b}
   %
+  % N.b. the most recent IM is available as \thisIM; e.g. \ImSummary\thisIM (it's also set by \IM{?})
+  %
+  \gdef\thisIM{#1}
   \section{IM\texorpdfstring{$_{\text{#2}}$}{#2} [#1]: #4 (#3)}%
   \label{IM:#1}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname nameIM#1\endcsname}{#2}}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname dateIM#1\endcsname}{#3}}%
   \write\@auxout{\unexpanded{\expandafter\gdef\csname summaryIM#1\endcsname}{#5}}%
+  %
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname completionIM#1\endcsname}{}}% set by \completeIM
 }
+\newcommand{\completeIM}[2]{%
+  % declare that and when an IM is complete.
+  % e.g.
+  %  \completeIM{\thisIM}{2021-09-01 \JIRA{DM}{30764}{}}
+  % where \thisIM is a shortcut for the last \declareIM or \IM call
+  \edef\foo{\noexpand\c@mpleteIM{#1}} \foo{#2}
+}
+\newcommand{\c@mpleteIM}[2]{%
+  \write\@auxout{\unexpanded{\expandafter\gdef\csname completionIM#1\endcsname}{#2}}%
+}
+
 \makeatother
 \newcommand{\JIRA}[3]{\href{https://jira.lsstcorp.org/browse/#1-#2}{(\textcolor{blue}{#1-#2} #3})}
 
@@ -123,32 +141,36 @@ the deliverable, and to carry out an internal \gls{ORR} for the functionality de
 \begin{tabular}{ll|c|c|p{0.29\textwidth}|p{0.25\textwidth}}
   IM & & Sim? & Target Date & Completion & Comments \\
   \hline
-  \IM{a} & \IMsummary{a} & N & \IMdate{a} & \textit{c.} 2021-05-01 & \\
-  \IM{c} & \IMsummary{c} & N & \IMdate{c} & \textit{c.} 2021-06 & no logging \\
-  \IM{ppg} & \IMsummary{ppg} & Y & \IMdate{ppg} & \textit{c.} 2021-06-24 & In parallel with \IM{f} \\
-  \IM{b} & \IMsummary{b} & N & \IMdate{b} & 2021-08-01 only biases & no logging \\
-  \IM{d} & \IMsummary{d} & Y & \IMdate{d} & 2021-08-05 & \\
-  \IM{pg} & \IMsummary{pg} & Y & \IMdate{pg} & 2021-08-19 (Tiago to provide docs) & In parallel with \IM{f} \\
-  \IM{ppf} & \IMsummary{ppf} & Y & \IMdate{ppf} & 2021-08-19 (if all 4 corner rafts OK) & \\
-  \IM{pf} & \IMsummary{pf} & Y & \IMdate{pf} & & In parallel with \IM{pg} \\
-  \IM{f} & \IMsummary{f} & Y & \IMdate{f} & & In parallel with \IM{g} \\
-  \IM{g} & \IMsummary{g} & Y & \IMdate{g} & & Blocked by DAQ playback \\
-  \IM{e} & \IMsummary{e} & N & \IMdate{e} & & \\
-  \IM{h} & \IMsummary{h} & Y & \IMdate{h} & & Blocked by DAQ playback \\
-  \IM{pm} & \IMsummary{pm} & Y/N & \IMdate{pm} & & \\
-  \IM{m} & \IMsummary{m} & N & \IMdate{m} & & \\
-  \IM{n} & \IMsummary{n} & N & \IMdate{n} & & \\
-  \IM{o} & \IMsummary{o} & N & \IMdate{o} & & \\
+  \IM{a} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{pc} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & 2021-06 & no logging \\
+  \IM{c} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{ppg} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & In parallel with \IM{f} \\
+  \IM{pb} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{b} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & no logging \\
+  \IM{d} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{pg} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & In parallel with \IM{f}. \\
+  \IM{ppf} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{pf} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & In parallel with \IM{pg} \\
+  \IM{f} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & In parallel with \IM{g} \\
+  \IM{g} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & Blocked by DAQ playback \\
+  \IM{e} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{h} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & Blocked by DAQ playback \\
+  \IM{pm} & \IMsummary{\thisIM} & Y/N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{m} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{n} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{o} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
   \hline
-  \IM{i} & \IMsummary{i} & Y & \IMdate{i} & & \\
-  \IM{j} & \IMsummary{j} & N & \IMdate{j} & & \\
-  \IM{k} & \IMsummary{k} & Y & \IMdate{k} & & \\
-  \IM{cbp} & \IMsummary{cbp} & N & \IMdate{cbp} & & \\
+  \IM{i} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{j} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{k} & \IMsummary{\thisIM} & Y & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
+  \IM{cbp} & \IMsummary{\thisIM} & N & \IMdate{\thisIM} & \IMcompletion{\thisIM} & \\
 \end{tabular}
 
 \newcommand{\inputIM}[1]{\vfil\eject\input{#1}}
 \inputIM{IMa}
+\inputIM{IMpb}
 \inputIM{IMb}
+\inputIM{IMpc}
 \inputIM{IMc}
 \inputIM{IMd}
 \inputIM{IMe}

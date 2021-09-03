@@ -1,8 +1,9 @@
-\declareIM{c}{3}{2021-05-31}{Rubin AuxTel Standard Star Campaign}{AT Scripted/OCPS}
+\declareIM{pc}{3a}{2021-05-31}{Rubin AuxTel Standard Star Campaign}{AT Scripted}
+\completeIM{\thisIM}{2021-06}
 
 Executive Summary:
 
-Demonstrates ability to take and reduce AuxTel data using the scriptQueue.
+Demonstrates ability to take and reduce AuxTel data
 
 \textbf{No direct mapping to P6 activity, indirect mappings are below}
 
@@ -20,7 +21,6 @@ Demonstrates ability to take and reduce AuxTel data using the scriptQueue.
 \subsection{Prerequisites}
 \begin{itemize}
 	\item{\IM{b} Completed}
-	\item{\IM{pc} Completed}
 	\item{AuxTel and LATISS functional and ready to track a target. Rough focus should be achieved.}
 	\item{Available staff for night time operations}
 	\item{User commenting in \gls{RLS} available}
@@ -36,27 +36,19 @@ The following procedure is to be executed by an observing specialist.
 	\item Manually take a single OBJECT image:
 	\begin{enumerate}
 		\item Verify functionality of the \gls{LOVE} interface, including instrument setup and applied focus offset(s).
-		\item Using the \gls{OCPS}, perform basic \gls{ISR} on the image and wait for the result (e.g. "await ocps.process(visitID, task\_name)")
-		\item Display the image locally after running \gls{ISR}
+		\item Perform basic \gls{ISR} on the image using DM code
+		\item Display the image after running \gls{ISR}
 	\end{enumerate}	
 	\item Using the standard visit script launched from a notebook, slew to new target and perform automated acquisition only, script must have user verify offset prior to motion.
 	\item Perform the standard data taking sequence using the standard visit script
-	\item Perform a single image with the instrument in it's standard spectral mode, then send for reduction with the \gls{OCPS}. Wait for reduction to complete.
-	\item View the results locally in the notebook.
-	\item Perform a custom sequence using at least two items in the grating wheel and two in the filter wheel, all with different exposure times (\gls{OCPS} should only perform ISR)
+	\item Perform a single image with the instrument in its standard spectral mode
+	\item Perform a custom sequence using at least two items in the grating wheel and two in the filter wheel, all with different exposure times
 	\begin{enumerate}
-		\item Verify functionality of the \gls{LOVE} interface, including filter/grating changes/shutter movement, focus/pointing offsets, \gls{OCPS} status 
-		% Do we get any OCPS status? How do we monitor that?
-		\item Display the \gls{ISR} processed images locally as they are available
-		\item Monitor the transfer status and elapsed time between when the image is written on the summit to when it can be accessed from the \gls{RSP}.
+		\item Verify functionality of the \gls{LOVE} interface, including filter/grating changes/shutter movement, focus/pointing offsets
+		\item Display the \gls{ISR} processed images as they are available
 	\end{enumerate}	
-	\item Using the scriptQueue:
+	\item Manually and off-line:
 		\begin{enumerate}
-			\item Perform standard observations of 3 targets spanning the elevation range sequentially, script must send data to \gls{OCPS} for reduction (but not await results)
-			\item Display extracted atmospheric parameters for each target % HOW?
-			\item Comment in \gls{RLS} about the weather or image quality
-			\item Perform same observations, but with a custom modified configuration (exposure time or filter adjustment)
+			\item Perform standard observations of 3 targets spanning the elevation range sequentially			\item Display extracted atmospheric parameters for each target % HOW?
 		\end{enumerate}
-	\item From the Base and the \gls{RSP}, redo reduction of scriptQueue visit data
-	\item From the Base and the \gls{RSP}, view the log and correlate comments against images.
 \end{enumerate}

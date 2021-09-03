@@ -1,33 +1,31 @@
-\declareIM{b}{2}{2021-05-21}{ComCam Calibration Acquisition, Transfer, and Processing}{CC Calib Gen'n}
-%\completeIM{\thisIM}{2021-09 ???}
+\declareIM{pb}{2a}{2021-05-21}{ComCam Calibration Acquisition, Transfer, and Processing}{CC Calib Gen'n}
+\completeIM{\thisIM}{2021-08-01 only biases}
 
 Executive Summary:
 
-Run ComCam from notebooks and the scriptQueue, with automated generation and certification of ComCam calibrations
+Run ComCam from notebooks and the scriptQueue, with automated generation of ComCam calibrations
 
 \textbf{Does not map well. Somewhat maps to same milestones as previous exercise, but no solid mapping as this is more about operator awareness and DM related functionality. }
 
 \textbf{\Nb this is the IM that mentions the use of the EFD.  We should expand this, and maybe split it out.}
 
 \subsection{Goals of IM}
-%\label{sec:org3154347}
 \begin{itemize}
 	\item Triggering \gls{OCPS} processing from nublado/scriptQueue
 	\item Automated generation and availability of ComCam master calibrations in Chile
-	\item Use of \gls{RLS} and \gls{LOVE} to manage scriptQueue
+	\item Use of \gls{LOVE} to manage scriptQueue
 	\begin{itemize}
 		\item including monitoring of data transfer to NCSA
 	\end{itemize}
 	\item Demonstration that the operator can cycle through states, bring
 	the system up from \texttt{STANDBY}, and take data without any intervention from developers
 	\item Monitor the health of the \gls{CCS} from the observatory environment (e.g. Chronograph/\gls{LOVE})
-	\item Explore relationship between \gls{EFD} and Camera trending databases
-	\item Query capability (TAP/ADQL) access to \gls{EFD} from \gls{RSP}
 \end{itemize}
 
 \subsection{Prerequisites}
 \begin{itemize}
-	\item{\IM{pb} completed with functionality maintained}
+	\item{\IM{a} completed with functionality maintained}
+	\item{ComCam cold and functional with light source available for flat}
 \end{itemize}
 
 
