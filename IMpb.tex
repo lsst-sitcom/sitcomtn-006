@@ -1,4 +1,4 @@
-\declareIM{pb}{2a}{2021-05-21}{ComCam Calibration Acquisition, Transfer, and Processing}{CC Calib Gen'n}
+\declareIM{pb}{2a}{2021-05-21}{ComCam Calibration Acquisition, Transfer, and Processing Certification}{CC Calib Gen'n}
 \completeIM{\thisIM}{2021-08-01 only biases}
 
 Executive Summary:
@@ -41,11 +41,11 @@ The following procedure is to be executed by an observing specialist. Assistance
 		\item Using the OCPS, perform basic \gls{ISR} on the image and wait for the result (e.g. "await ocps.process(visitID, task\_name)")
 		\item Display the ISR-corrected image
 		\item Monitor the transfer status and elapsed time between when the image is written on the summit to when it can be accessed at NCSA.
-	\end{itemize}	
+	\end{itemize}
 	\item Modify the script from \IM{a} used to take calibrations to also command the \gls{OCPS} to reduce the data
 	\begin{itemize}
 		\item Take \emph{only} a stack of $\sim$10 bias frames
-		\item Using the \gls{OCPS}, build a master bias from inside the script. Do not wait for the processing to finish 
+		\item Using the \gls{OCPS}, build a master bias from inside the script. Do not wait for the processing to finish
 			\begin{itemize}
 				\item One could use "asyncio.future(ocps.process(visitID, task\_name))"
 			\end{itemize}
