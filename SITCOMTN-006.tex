@@ -63,7 +63,7 @@
 % \setDocSubtitle{A subtitle}
 
 \author{%
-Robert Lupton
+Robert Lupton, Keith Bechtol
 }
 
 \setDocRef{SITCOMTN-006}
@@ -187,8 +187,28 @@ the deliverable, and to carry out an internal \gls{ORR} for the functionality de
 \inputIM{IMcbp}  % == L
 \inputIM{IMpm}
 \inputIM{IMm}
-\inputIM{IMn}
-\inputIM{IMo}
+\inputIM{IMpn} % Initial Imaging Campaign with AuxTel
+\inputIM{IMn} % ``DRP'' Imaging Campaign with AuxTel
+\inputIM{IMo} % ``AP'' Imaging Campaign with AuxTel
+% XXX Compute Zernikes for ComCam
+\inputIM{IMp} % IMp ComCam Build and Refine Pointing Model (single-frame processing)
+%     Ghosting and stray light measurements
+\inputIM{IMq} % IMq AOS (Zernikes + control) for ComCam
+\inputIM{IMr} %IMr ComCam Star Flat
+\inputIM{IMps} % IMs ComCam Science Validation Surveys Initial DRP Processing (Template Generation)
+\inputIM{IMt} % IMpt ComCam Science Validation Surveys AP Processing (Replay)
+\inputIM{IMs} % IMt ComCam Science Validation Surveys Full DRP Processing
+
+\inputIM{IMu} % LSSTCam Calibration Acquisition, Transfer, and Processing
+% XXX Compute Zernikes for LSSTCam
+\inputIM{IMv} % IMv LSSTCam Build and Refine Pointing Model (single-frame processing)
+%     Ghosting and stary light measurements
+% XX IMw LSSTCam (Zernikes + control) for LSSTCam
+\inputIM{IMw} % IMw LSSTCam Star Flat
+\inputIM{IMx} % IMx LSSTCam Science Validation Surveys Initial DRP Processing (Template Generation)
+\inputIM{IMpz} % IMpy LSSTCam Science Validation Surveys AP Processing (Replay)
+\inputIM{IMy} % IMy LSSTCam Science Validation Surveys AP Processing (Real time)
+\inputIM{IMz} % IMz LSSTCam Science Validation Surveys Full DRP Processing
 \inputIM{IMbacklog}
 
 \appendix
@@ -280,7 +300,7 @@ Initial TCS + DAQ WFS Interface Tests
 \item attempt stress the system over wide range of conditions
 \end{itemize}
 Prerequisites: pointing model, \IM{b}, \IM{g}
-  
+
 \subsection{ComCam Electro-Optical Tests 2}
 
 \begin{itemize}
